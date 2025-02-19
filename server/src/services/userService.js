@@ -1,6 +1,7 @@
 import User from "../models/User.js"
 import bcrypt from 'bcrypt';
 import { generateToken } from "../Utils/tokenUtils.js";
+import invalidToken from "../models/InvalidToken.js";
 
 
 const register = async (userData) => {
@@ -29,9 +30,14 @@ const login = async (email, password) => {
         return { user, token }
 };
 
+const invalidateToken = (token) => {
+        return invalidToken.create({ token });
+}
+
 const userService = {
     register,
-    login
+    login,
+    invalidateToken
 };
 
 export default userService;

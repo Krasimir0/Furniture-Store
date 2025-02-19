@@ -14,6 +14,14 @@ userController.post('/register', async (req, res) => {
     });
 });
 
+userController.get('/logout', async (req, res) => {
+    const token = req.headers['x-authorization'];
+
+    await userService.invalidateToken(token);
+    
+
+});
+
 userController.post('/login', async (req, res) => {
     const {email, password} = req.body;
     const { user, token } = await userService.login(email, password);
