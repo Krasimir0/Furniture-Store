@@ -15,6 +15,6 @@ const invalidSchema = new Schema({
     timestamps: true,
 });
 
-const invalidToken = model('InvalidToken', invalidSchema);
+const InvalidToken = model('InvalidToken', invalidSchema);
 
-export default invalidToken;
+export default InvalidToken;
