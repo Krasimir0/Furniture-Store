@@ -1,5 +1,6 @@
 import { Router } from "express";
 import userService from "../services/userService.js";
+import { auth } from "../../middlewares/authMiddleware.js";
 
 const userController = Router();
 
@@ -16,10 +17,10 @@ userController.post('/register', async (req, res) => {
 
 userController.get('/logout', async (req, res) => {
     const token = req.headers['x-authorization'];
-
+    
     await userService.invalidateToken(token);
     
-
+    res.json({})
 });
 
 userController.post('/login', async (req, res) => {

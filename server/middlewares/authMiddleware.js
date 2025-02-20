@@ -13,11 +13,13 @@ export const auth = async (req, res, next) => {
         const invalidToken = await InvalidToken.findOne({ token });
 
         if (invalidToken) {
-            return res.status(401).json({ error: 'Invalid token'});
+            return res.json({ error: 'Invalid token'});
         }
 
         try {
             const decodedToken = jwt.verify(token, JWT_SECRET);
+            console.log(decodedToken);
+            
             req.user = decodedToken;
         } catch (err) {
             return res.status(401).json({error: "Invalid token"});

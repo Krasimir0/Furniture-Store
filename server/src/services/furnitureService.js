@@ -1,12 +1,26 @@
 import Furniture from "../models/Furniture.js"
 
-
-const createFurniture = (furnitureData, userId) => {
-   return Furniture.create({ ...furnitureData, creator: userId });
+const getAll = () => {
+    return Furniture.find({});
 }
 
+const createFurniture = (furnitureData, userId) => {
+   return Furniture.create({ ...furnitureData, _ownerId: userId });
+}
+
+const getOne = (furnitureId) => {
+    return Furniture.findById(furnitureId);
+}
+
+ const update = ( furnitureId, furnitureData) => {
+    return Furniture.findByIdAndUpdate(furnitureId, furnitureData);
+ }
+
 const furnitureService = {
-    createFurniture
+    createFurniture,
+    getAll,
+    getOne, 
+    update
 }
 
 export default furnitureService;

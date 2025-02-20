@@ -4,12 +4,18 @@ import { isAuth } from "../../middlewares/authMiddleware.js";
 
 const furnitureController = Router();
 
-furnitureController.get("/", (req, res) => {
-    res.json([]);
+furnitureController.get("/", async (req, res) => {
+    const furnitures = await furnitureService.getAll();
+     
+    res.json(furnitures);
   });
 
-furnitureController.get("/:furnitureId", (req, res) => {
-    res.json([]);
+furnitureController.get("/:furnitureId", async (req, res) => {
+    const furnitureId = req.params.furnitureId;
+    const furniture = await furnitureService.getOne(furnitureId);
+    
+        
+    res.json(furniture);
 });
 
 furnitureController.post("/", isAuth, async (req, res) => {
@@ -21,8 +27,12 @@ furnitureController.post("/", isAuth, async (req, res) => {
 });
 
 
-furnitureController.put("/:furnitureId", (req, res) => {
-    res.json([]);
+furnitureController.put("/:furnitureId", async (req, res) => {
+    const furnitureId = req.params.furnitureId;
+    const furnitureData = req.body;
+    
+    const updatedFurniture = await furnitureService.update(furnitureId, furnitureData);
+    res.json(updatedFurniture);
 });
 
 
