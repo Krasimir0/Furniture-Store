@@ -15,7 +15,6 @@ furnitureController.get("/:furnitureId", (req, res) => {
 furnitureController.post("/", isAuth, async (req, res) => {
     const furnitureData = req.body;
     const userId = req.user.id
-
     const newFurniture = await furnitureService.createFurniture(furnitureData, userId);
 
     res.json(newFurniture);
